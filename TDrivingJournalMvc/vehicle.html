@@ -1,0 +1,47 @@
+﻿<div layout="column">
+    <md-card ng-repeat="item in vehicles">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">{{item.displayName}}</span>
+                <span class="md-subhead" style="text-transform: uppercase">{{item.state}}</span>
+            </md-card-title-text>
+            <md-card-title-media>
+                <div class="md-media-sm card-media">
+                    <div class="md-avatar">
+                        <user-avatar></user-avatar>
+                    </div>
+                </div>
+            </md-card-title-media>
+        </md-card-title>
+        <md-card-content>
+            <p>
+                The current mileage reading is
+            </p>
+            <md-progress-circular md-mode="indeterminate" md-diameter="60" ng-show="item.working"></md-progress-circular>
+            <h4 ng-hide="item.working" title="Current reading">{{item.mileage*kilometersPerMile | number:0}} km</h4>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-click="storeMileage(item)" ng-disabled="item.working">Store mileage</md-button>
+            <md-button ng-click="startWorkTrip(item)" class="md-primary" ng-disabled="item.working">Start work trip</md-button>
+        </md-card-actions>
+    </md-card>
+
+
+    <md-card ng-repeat="item in trips">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Work trip started {{item.Commenced | date:'medium'}}</span>
+                <span class="md-subhead" style="text-transform: uppercase" ng-if="item.EndMileage">Distance: {{item.Distance*kilometersPerMile | number:0}} km</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content ng-if="item.Note">
+            <p>
+                {{item.Note}}
+            </p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-click="deleteWorkTrip(item)">Delete</md-button>
+            <md-button class="md-primary" ng-if="!item.EndMileage" ng-click="endWorkTrip(item)">End work trip</md-button>
+        </md-card-actions>
+    </md-card>
+</div>

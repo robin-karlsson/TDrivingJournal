@@ -1,0 +1,15 @@
+﻿<div layout="column" ng-show="page === 2">
+    <md-card ng-repeat="item in reports">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Work trip distance {{item.FirstDayInMonth | date:'MMMM yyyy'}}</span>
+                <span class="md-subhead" style="text-transform: uppercase"></span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <p>
+                Distance: {{item.Distance*kilometersPerMile | number:0}} km
+            </p>
+        </md-card-content>
+    </md-card>
+</div>
